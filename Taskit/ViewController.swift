@@ -12,17 +12,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var tableView: UITableView!
    
-    var taskArray:[Dictionary<String,String>] = []
+    var taskArray:[TaskModel] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let task1:Dictionary<String,String> = ["task": "Study French", "subtask": "parle vouz?", "date": "01/14/2014"]
-        let task2:Dictionary<String,String> = ["task": "eat dinner", "subtask": "burgers", "date": "01/14/2014"]
-        let task3:Dictionary<String,String> = ["task": "Play Guitar", "hard rock": "parle vouz?", "date": "01/16/2014"]
-        let task4:Dictionary<String,String> = ["task": "chill out", "subtask": "zzzzzzz", "date": "01/17/2014"]
+        let task1 = TaskModel(task: "Study french", subTask: "parle vouz", date: "01/04/2014")
+        let task2 = TaskModel(task: "eat dinner", subTask: "burgers", date: "01/04/2014")
+        let task3 = TaskModel(task: "play guitar", subTask: "hard rock", date: "01/34/2014")
+        let task4 = TaskModel(task: "Sleep", subTask: "zzzzz", date: "01/24/2014")
         
         taskArray = [task1, task2, task3, task4]
         
@@ -43,12 +43,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: TaskCell = tableView.dequeueReusableCellWithIdentifier("myCell") as TaskCell
         
-        let taskDict:Dictionary = taskArray[indexPath.row]
+        let thisTask = taskArray[indexPath.row]
         
         
-        cell.taskLabel.text = taskDict["task"]
-        cell.descriptionLabel.text = taskDict["subtask"]
-        cell.dateLabel.text = taskDict["date"]
+        cell.taskLabel.text = thisTask.task
+        cell.descriptionLabel.text = thisTask.subTask
+        cell.dateLabel.text = thisTask.date
         
         
         return cell
