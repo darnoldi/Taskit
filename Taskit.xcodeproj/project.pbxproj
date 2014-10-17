@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F8A068519F1091B00C7921A /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A068419F1091B00C7921A /* TaskDetailViewController.swift */; };
 		0F946C4719EBC40B009B54E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F946C4619EBC40B009B54E9 /* AppDelegate.swift */; };
 		0F946C4919EBC40B009B54E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F946C4819EBC40B009B54E9 /* ViewController.swift */; };
 		0F946C4C19EBC40B009B54E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F946C4A19EBC40B009B54E9 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F8A068419F1091B00C7921A /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		0F946C4119EBC40B009B54E9 /* Taskit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taskit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F946C4519EBC40B009B54E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F946C4619EBC40B009B54E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				0F946C4619EBC40B009B54E9 /* AppDelegate.swift */,
 				0F946C4819EBC40B009B54E9 /* ViewController.swift */,
+				0F8A068419F1091B00C7921A /* TaskDetailViewController.swift */,
 				0FE892C519EFFA8900B589B2 /* TaskModel.swift */,
 				0F946C6619EC0431009B54E9 /* TaskCell.swift */,
 				0F946C4A19EBC40B009B54E9 /* Main.storyboard */,
@@ -222,6 +225,7 @@
 				0F946C6719EC0431009B54E9 /* TaskCell.swift in Sources */,
 				0FE892C619EFFA8900B589B2 /* TaskModel.swift in Sources */,
 				0F946C4719EBC40B009B54E9 /* AppDelegate.swift in Sources */,
+				0F8A068519F1091B00C7921A /* TaskDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
