@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ksp-aI-wyS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ksp-aI-wyS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -59,6 +59,24 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="1k8-Xj-bKz"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXw-Vl-4Pg">
+                                <rect key="frame" x="262" y="58" width="38" height="30"/>
+                                <state key="normal" title="down">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="downButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0s8-dj-jdK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-K7-qMy">
+                                <rect key="frame" x="224" y="58" width="30" height="30"/>
+                                <state key="normal" title="up">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="upButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dcl-ds-whK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -82,7 +100,6 @@
         <!--Detail-->
         <scene sceneID="mMC-AZ-0aY">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EE6-Ge-ZHs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="I65-r5-xVi" customClass="TaskDetailViewController" customModule="Taskit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RFk-Jp-BTy"/>
@@ -117,7 +134,11 @@
                                 <action selector="cancelButtonTapped:" destination="I65-r5-xVi" id="G9F-CW-8hE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="jxf-3H-XeA"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="jxf-3H-XeA">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="I65-r5-xVi" id="1VM-4F-Pre"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="doDatePicker" destination="pf2-XS-0yD" id="RZe-qg-GsL"/>
@@ -125,6 +146,7 @@
                         <outlet property="taskTextField" destination="BEv-ch-8ga" id="zMN-kL-m9b"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EE6-Ge-ZHs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1705" y="1068"/>
         </scene>
@@ -188,10 +210,18 @@
                                 <state key="normal" title="Add Task">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="addTaskButtonPressed:" destination="qKD-TJ-BBl" eventType="touchUpInside" id="lRF-fD-40k"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="dueDatePicker" destination="q2e-e1-2ph" id="pFu-xp-KHS"/>
+                        <outlet property="subtaskTextField" destination="Cd5-Ce-DCS" id="IIf-cT-MDp"/>
+                        <outlet property="taskTextField" destination="Nx4-xc-ba7" id="kov-yk-BOi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZ1-fB-bqw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

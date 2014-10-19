@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
    
     var taskArray:[TaskModel] = []
-    
+    var sortOrder:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         taskArray = [task1, task2, task3, task4]
         
-        //tableView.reloadData()
+        //self.tableView.reloadData()
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        refreshTable()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +56,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let indexPath = self.tableView.indexPathForSelectedRow()
             let thisTask = taskArray[indexPath!.row]
             detailVC.detailTaskModel = thisTask
+            detailVC.mainVC = self
             
+        }
+        else if segue.identifier == "showTaskAdd" {
+            let addTaskVC: AddTaskViewController = segue.destinationViewController as AddTaskViewController
+            addTaskVC.mainVC = self
         }
         
     }
@@ -59,10 +72,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.performSegueWithIdentifier("showTaskAdd", sender: self)
     }
     
+    @IBAction func upButtonPressed(sender: UIButton) {
+        sortOrder = true
+        refreshTable()
+    }
+    
+    @IBAction func downButtonPressed(sender: UIButton) {
+        sortOrder = false
+        refreshTable()
+    }
+    
+    
     //UItableViewDataSource
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return taskArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -89,6 +113,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         performSegueWithIdentifier("showTaskDetail", sender: self)
     }
-
+    
+    
+    //helpers
+    func refreshTable () {
+        
+        
+        if sortOrder == true {
+            taskArray = taskArray.sorted{
+                (taskOne: TaskModel, taskTwo: TaskModel) -> Bool in
+                return taskOne.date.timeIntervalSince1970 < taskTwo.date.timeIntervalSince1970
+            }}
+            else if sortOrder == false {
+                taskArray = taskArray.sorted{
+                    (taskOne: TaskModel, taskTwo: TaskModel) -> Bool in
+                    return taskOne.date.timeIntervalSince1970 > taskTwo.date.timeIntervalSince1970
+                }
+            }
+        
+        
+        
+        
+        self.tableView.reloadData()
+        
+    }
+    
 }
+
 
