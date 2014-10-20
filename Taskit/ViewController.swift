@@ -21,25 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        let date1 = Date.from(year: 2014, month: 05, day: 20)
-        let date2 = Date.from(year: 2014, month: 03, day: 14)
-        let date3 = Date.from(year: 2014, month: 06, day: 01)
-        let date4 = Date.from(year: 2014, month: 05, day: 30)
-        
-        
-        let task1 = TaskModel(task: "Study french", subTask: "parle vouz", date: date1, completed: false)
-        let task2 = TaskModel(task: "eat dinner", subTask: "burgers", date: date2, completed: false)
-        let task3 = TaskModel(task: "play guitar", subTask: "hard rock", date: date3, completed: false)
-        let task4 = TaskModel(task: "Sleep", subTask: "zzzzz", date: date4, completed: false)
-        
-        let taskArray = [task1, task2, task3, task4]
-        
-        var completedArray = [TaskModel(task: "Code", subTask: "Task Project", date: date2, completed: true)]
-        
-        baseArray = [taskArray, completedArray]
-        
-        
-        //self.tableView.reloadData()
+    
     }
     
     
