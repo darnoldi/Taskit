@@ -12,7 +12,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var tableView: UITableView!
    
-    var taskArray:[TaskModel] = []
+    var baseArray:[[TaskModel]] = []
+    
     var sortOrder:Bool = true
     
     override func viewDidLoad() {
@@ -26,12 +27,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let date4 = Date.from(year: 2014, month: 05, day: 30)
         
         
-        let task1 = TaskModel(task: "Study french", subTask: "parle vouz", date: date1)
-        let task2 = TaskModel(task: "eat dinner", subTask: "burgers", date: date2)
-        let task3 = TaskModel(task: "play guitar", subTask: "hard rock", date: date3)
-        let task4 = TaskModel(task: "Sleep", subTask: "zzzzz", date: date4)
+        let task1 = TaskModel(task: "Study french", subTask: "parle vouz", date: date1, completed: false)
+        let task2 = TaskModel(task: "eat dinner", subTask: "burgers", date: date2, completed: false)
+        let task3 = TaskModel(task: "play guitar", subTask: "hard rock", date: date3, completed: false)
+        let task4 = TaskModel(task: "Sleep", subTask: "zzzzz", date: date4, completed: false)
         
-        taskArray = [task1, task2, task3, task4]
+        let taskArray = [task1, task2, task3, task4]
+        
+        var completedArray = [TaskModel(task: "Code", subTask: "Task Project", date: date2, completed: true)]
+        
+        baseArray = [taskArray, completedArray]
+        
         
         //self.tableView.reloadData()
     }
@@ -54,7 +60,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if segue.identifier == "showTaskDetail" {
             let detailVC: TaskDetailViewController = segue.destinationViewController as TaskDetailViewController
             let indexPath = self.tableView.indexPathForSelectedRow()
-            let thisTask = taskArray[indexPath!.row]
+            let thisTask = baseArray[indexPath!.section][indexPath!.row]
             detailVC.detailTaskModel = thisTask
             detailVC.mainVC = self
             
@@ -84,15 +90,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     //UItableViewDataSource
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return baseArray.count
+    }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count
+        
+        
+        
+        return baseArray[section].count
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: TaskCell = tableView.dequeueReusableCellWithIdentifier("myCell") as TaskCell
         
-        let thisTask = taskArray[indexPath.row]
+        let thisTask = baseArray[indexPath.section][indexPath.row]
         
         
         cell.taskLabel.text = thisTask.task
@@ -115,17 +129,50 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 25
+        
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "To Do"
+        }
+        else {
+            return "Completed"
+        }
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let thisTask = baseArray[indexPath.section][indexPath.row]
+        
+        
+        if indexPath.section == 0 {
+        
+        var newTask = TaskModel(task: thisTask.task, subTask: thisTask.subTask, date: thisTask.date, completed: true)
+        baseArray[1].append(newTask)
+        }
+        else {
+            var newTask = TaskModel(task: thisTask.task, subTask: thisTask.subTask, date: thisTask.date, completed: false)
+            baseArray[0].append(newTask)
+        }
+        
+        baseArray[indexPath.section].removeAtIndex(indexPath.row)
+        refreshTable()
+    }
+    
     //helpers
     func refreshTable () {
         
         
         if sortOrder == true {
-            taskArray = taskArray.sorted{
+            baseArray[0] = baseArray[0].sorted{
                 (taskOne: TaskModel, taskTwo: TaskModel) -> Bool in
                 return taskOne.date.timeIntervalSince1970 < taskTwo.date.timeIntervalSince1970
             }}
             else if sortOrder == false {
-                taskArray = taskArray.sorted{
+                baseArray[0] = baseArray[0].sorted{
                     (taskOne: TaskModel, taskTwo: TaskModel) -> Bool in
                     return taskOne.date.timeIntervalSince1970 > taskTwo.date.timeIntervalSince1970
                 }

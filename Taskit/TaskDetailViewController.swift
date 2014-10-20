@@ -48,8 +48,8 @@ class TaskDetailViewController: UIViewController {
    
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
         
-        var task = TaskModel(task: taskTextField.text, subTask: subTaskTextField.text, date: doDatePicker.date)
-        mainVC.taskArray[mainVC.tableView.indexPathForSelectedRow()!.row] = task
+        var task = TaskModel(task: taskTextField.text, subTask: subTaskTextField.text, date: doDatePicker.date, completed: false)
+        mainVC.baseArray[0][mainVC.tableView.indexPathForSelectedRow()!.row] = task
         
         
         
